@@ -1,0 +1,74 @@
+/* Conteneur principal */
+.container {
+  display: flex; /* Flexbox pour centrer */
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  background-color: #f9f9f9; /* Couleur de fond douce */
+  padding: 20px; /* Espacement interne */
+  box-sizing: border-box; /* Inclut les bordures et le padding dans les dimensions */
+  
+}
+
+/* Formulaire */
+.application-form {
+  width: 100%; /* Largeur complète */
+  max-width: 800px; /* Largeur maximale pour contrôler l'étirement */
+  background-color: #ffffff; /* Fond blanc pour le formulaire */
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce pour effet flottant */
+  padding: 30px; /* Espacement interne */
+  box-sizing: border-box; /* Inclut les bordures et padding dans les dimensions */
+  display: flex; /* Flexbox pour organisation */
+  flex-direction: column; /* Organisation verticale */
+  gap: 15px; /* Espacement entre les éléments */
+}
+
+/* Titre */
+.application-form h2 {
+  font-size: 24px; /* Taille de police */
+  color: #34495e; /* Couleur élégante */
+  text-align: center; /* Centrer le texte */
+  margin-bottom: 20px; /* Espacement sous le titre */
+}
+
+/* Champs du formulaire */
+.application-form label {
+  font-size: 16px; /* Taille de police */
+  color: #2c3e50; /* Couleur sombre */
+  margin-bottom: 5px; /* Espacement sous le label */
+}
+
+.application-form select,
+.application-form textarea,
+.application-form input[type="file"] {
+  width: 100%; /* Largeur complète */
+  padding: 10px; /* Espacement interne */
+  border: 1px solid #bdc3c7; /* Bordure grise */
+  border-radius: 5px; /* Coins arrondis */
+  font-size: 14px; /* Taille de police */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre intérieure */
+}
+
+/* Zone de texte pour la lettre de motivation */
+.application-form textarea {
+  height: 120px; /* Hauteur plus grande pour plus de contenu */
+  resize: none; /* Désactive le redimensionnement manuel */
+}
+
+/* Bouton de soumission */
+.application-form button {
+  background-color: #0ed01b; /* Bleu élégant */
+  border-radius: 5px;
+  color: #ffffff; /* Texte blanc */
+  border: none; /* Supprime les bordures */
+  padding: 10px 20px; /* Espacement interne */
+  font-size: 16px; /* Taille de la police */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Curseur pointeur */
+  transition: background-color 0.3s ease; /* Transition fluide */
+}
+
+.application-form button:hover {
+  background-color: #2980b9; /* Bleu plus foncé au survol */
+}

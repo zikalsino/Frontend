@@ -1,0 +1,73 @@
+/* JobOfferCreator.css */
+
+.container {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  }
+  
+  h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    width: 150px;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  .create-button {
+    display: block;
+    margin: 0 auto;
+    background-color: #28a745;
+  }
+  
+  .create-button:hover {
+    background-color: #218838;
+  }
+  
+  .job-offer {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    padding: 20px;
+  }
+  
+  .job-offer h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .job-offer p {
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .job-offer .actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .actions button {
+    flex: 1;
+    margin: 5px;
+  }
+  

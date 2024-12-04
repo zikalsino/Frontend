@@ -1,0 +1,81 @@
+/* Styles pour la page de login */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Assurez-vous que le body et html prennent toute la hauteur de la page */
+}
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre tous les éléments */
+  justify-content: center;
+  height: 100%; /* Prend toute la hauteur de la page */
+  background: url('https://th.bing.com/th/id/R.adb8931d4317cd478ef59a4841738abf?rik=M2i6uApCqA7ydA&pid=ImgRaw&r=0') no-repeat center center fixed; /* L'arrière-plan que vous avez donné */
+  background-size: cover; /* S'assure que l'image couvre tout l'arrière-plan */
+}
+
+.logo {
+  width: 150px; /* Ajuste la taille du logo */
+  height: auto;
+  margin-bottom: 30px; /* Espacement entre le logo et le formulaire */
+}
+
+.login-container {
+  width: 100%;
+  max-width: 400px; /* Limite la largeur du formulaire */
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8); /* Fond semi-transparent pour mieux voir le texte */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ajoute une ombre autour du formulaire */
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px; /* S'assure que le formulaire a une hauteur minimale */
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333; /* Titre en gris foncé */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.error-message, .success-message {
+  text-align: center;
+  font-size: 14px;
+  color: red;
+}
+
+.success-message {
+  color: green;
+}

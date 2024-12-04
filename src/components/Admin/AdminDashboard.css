@@ -1,0 +1,106 @@
+/* Style général du tableau de bord */
+.admin-dashboard {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style de la barre latérale */
+.sidebar {
+  width: 250px;
+  background-color: #cd1e25;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fixe la barre latérale */
+  left: 0; /* Place la barre à gauche */
+  top: 0; /* Place la barre en haut */
+  height: 100vh; /* S'étend sur toute la hauteur de la fenêtre */
+  z-index: 1000; /* Assure que la barre latérale reste au-dessus des autres éléments */
+}
+
+/* Ajustement du contenu principal pour éviter le chevauchement avec la sidebar */
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  overflow-y: auto;
+  margin-left: 250px; /* Ajoute un espace pour éviter que le contenu soit caché par la sidebar */
+}
+
+/* Ajustement de la taille du logo */
+.logo {
+  width: 150px; /* Ajustez la largeur selon vos besoins */
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* Titre du Dashboard
+.sidebar h2 {
+  color: #fff;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* Style des boutons du sidebar */
+.sidebar button {
+  width: 200px;
+  padding: 10px 20px;
+  margin: 10px 0;
+  background-color: #CDB31D;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.sidebar button i {
+  margin-right: 8px; /* Espacement pour les icônes */
+}
+
+.sidebar button:hover {
+  background-color: #444; /* Couleur plus claire au survol */
+}
+
+/* Style de la section de contenu */
+.content h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Style du bouton de déconnexion en petite icône */
+.logout-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  color: #cd1e25; /* Couleur rouge pour le texte */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.logout-button i {
+  font-size: 20px; /* Ajustez la taille de l'icône */
+}
+
+.logout-button:hover {
+  color: #d9534f; /* Change légèrement la couleur au survol */
+}
+.content button{
+  background-color: #003078;
+}

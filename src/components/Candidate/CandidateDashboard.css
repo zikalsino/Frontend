@@ -1,0 +1,94 @@
+/* Style global pour le tableau de bord du candidat */
+.candidate-dashboard {
+  display: flex; /* Organisation en flex pour aligner la sidebar et le contenu */
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  font-family: Arial, sans-serif; /* Police moderne et propre */
+  margin: 0; /* Supprime les marges externes */
+  padding: 0; /* Supprime les marges internes */
+  background-color: #f4f6f9; /* Couleur de fond claire */
+}
+
+/* Barre latérale */
+.sidebar {
+  width: 250px; /* Largeur fixe de la barre latérale */
+  background-color: #2c3e50; /* Couleur de fond sombre */
+  color: #ecf0f1; /* Texte clair */
+  padding: 20px; /* Espacement interne */
+  display: flex;
+  flex-direction: column; /* Alignement des éléments verticalement */
+  gap: 15px; /* Espacement entre les boutons */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Ombre légère à droite */
+}
+
+.sidebar h2 {
+  margin-bottom: 20px; /* Espacement sous le titre */
+  font-size: 18px; /* Taille de police du titre */
+  text-align: center; /* Centrer le texte */
+}
+
+/* Boutons dans la barre latérale */
+.sidebar button {
+  background-color: #34495e; /* Couleur de fond des boutons */
+  color: #ecf0f1; /* Couleur du texte */
+  border: none; /* Suppression des bordures */
+  padding: 12px 15px; /* Espacement interne */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Curseur pointeur */
+  font-size: 14px; /* Taille de la police */
+  transition: background-color 0.3s ease; /* Transition pour un effet fluide */
+}
+
+.sidebar button:hover {
+  background-color: #1abc9c; /* Couleur au survol */
+}
+
+/* Bouton de déconnexion */
+.logout-button {
+  position: absolute; /* Positionnement absolu */
+  top: 15px; /* Espace par rapport au haut */
+  right: 15px; /* Espace par rapport à la droite */
+  background-color: #e74c3c; /* Rouge vif */
+  color: white; /* Texte blanc */
+  border: none; /* Suppression des bordures */
+  border-radius: 50%; /* Forme circulaire */
+  width: 50px; /* Largeur augmentée */
+  height: 50px; /* Hauteur augmentée */
+  cursor: pointer; /* Curseur pointeur */
+  display: flex;
+  align-items: center; /* Centre l'icône verticalement */
+  justify-content: center; /* Centre l'icône horizontalement */
+  font-size: 20px; /* Taille de l'icône augmentée */
+  transition: background-color 0.3s ease; /* Transition pour un effet fluide */
+}
+
+.logout-button:hover {
+  background-color: #c0392b; /* Rouge foncé au survol */
+}
+
+/* Contenu principal */
+.content {
+  flex: 1; /* Prend tout l'espace restant */
+  background-color: #f4f6f9; /* Couleur de fond claire */
+  padding: 20px; /* Espacement interne */
+  overflow-y: auto; /* Ajoute un défilement vertical si le contenu dépasse */
+}
+
+.content h1 {
+  font-size: 24px; /* Taille de la police */
+  color: #2c3e50; /* Couleur sombre */
+  margin-bottom: 20px; /* Espacement inférieur */
+  text-align: center; /* Centre le texte */
+}
+
+/* Sections spécifiques */
+.search-section h2 {
+  font-size: 16px; /* Taille du titre de recherche ajustée */
+  color: #34495e; /* Couleur gris foncé */
+  margin-bottom: 10px; /* Espacement inférieur */
+}
+
+.content p {
+  color: #7f8c8d; /* Texte gris clair */
+  font-size: 16px; /* Taille de la police */
+  text-align: center; /* Centre le texte */
+}

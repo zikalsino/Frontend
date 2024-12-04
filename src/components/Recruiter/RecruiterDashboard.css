@@ -1,0 +1,134 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  height: 100%; /* Assure que body et html occupent tout l'écran */
+}
+
+/* Main container styling */
+.recruiter-dashboard {
+  height: 100%;
+}
+
+/* Sidebar styling */
+.sidebar {
+  width: 250px;
+  height: 100%;
+  background-color: #cd1e25;
+  color: #ecf0f1;
+  padding: 20px 0;
+  position: fixed; /* Sidebar fixée sur le côté gauche */
+  top: 0;
+  left: 0;
+  box-shadow: 2px 0 5px #cd1e25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #ecf0f1;
+  text-align: center;
+}
+
+/* Logo styling */
+.logo {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+/* Sidebar button styling */
+.sidebar button {
+  background-color: #34495e;
+  color: #ecf0f1;
+  border: none;
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar button:hover {
+  background-color: #1abc9c;
+}
+
+.sidebar button:focus {
+  outline: none;
+  background-color: #16a085;
+}
+
+/* Logout button styling */
+.logout-button {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
+}
+
+.logout-button i {
+  margin-right: 5px;
+}
+
+/* Main content area */
+.content {
+  margin-left: 250px; /* Laisse de l'espace pour la sidebar */
+  padding: 20px;
+  background-color: #ecf0f1;
+  height: 100vh; /* Assure que la section principale occupe toute la hauteur */
+  overflow-y: auto;
+}
+
+.content h1 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.content p {
+  font-size: 16px;
+  color: #7f8c8d;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+    padding: 10px;
+  }
+
+  .sidebar h2 {
+    font-size: 20px;
+  }
+
+  .sidebar button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .logout-button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .content {
+    margin-left: 200px;
+  }
+}

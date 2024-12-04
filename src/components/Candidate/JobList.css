@@ -1,0 +1,85 @@
+/* Conteneur principal pour la liste des offres */
+.job-list-container {
+  max-width: 800px; /* Limite la largeur pour un affichage agréable */
+  margin: 50px auto; /* Centre le conteneur horizontalement */
+  padding: 20px; /* Ajoute un espacement interne */
+  border: 1px solid #ccc; /* Bordure grise légère */
+  border-radius: 10px; /* Coins arrondis */
+  background-color: #f9f9f9; /* Fond doux */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
+}
+
+/* Titre principal */
+.job-list-container h2 {
+  font-size: 24px; /* Taille de police légèrement agrandie */
+  font-weight: bold; /* Texte en gras */
+  color: #333; /* Couleur gris foncé */
+  text-align: center; /* Centre le texte */
+  margin-bottom: 20px; /* Espacement inférieur */
+}
+
+/* Liste des offres */
+.job-list {
+  list-style-type: none; /* Supprime les puces */
+  padding: 0; /* Supprime les marges internes */
+}
+
+/* Élément de la liste */
+.job-item {
+  border: 1px solid #ddd; /* Bordure grise légère pour chaque élément */
+  border-radius: 5px; /* Coins arrondis */
+  padding: 15px; /* Ajoute un espacement interne */
+  margin-bottom: 15px; /* Espacement entre les éléments */
+  background-color: #fff; /* Fond blanc pour contraste */
+}
+
+/* Titre des offres */
+.job-item h3 {
+  font-size: 20px; /* Taille de police modérée */
+  color: #000; /* Couleur noire */
+  margin-bottom: 10px; /* Espacement inférieur */
+}
+
+/* Texte des informations */
+.job-item p {
+  margin: 5px 0; /* Espacement vertical modéré */
+  font-size: 14px; /* Taille de police standard */
+  color: #555; /* Couleur gris moyen */
+}
+
+/* Boutons pour postuler */
+.publish-button {
+  padding: 10px 15px; /* Espacement interne horizontal et vertical */
+  width: 150px;
+  text-align: center;
+  font-size: 14px; /* Taille de police modérée */
+  font-weight: bold; /* Texte en gras */
+  border: none; /* Supprime les bordures */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Change le pointeur pour indiquer un clic possible */
+  transition: background-color 0.3s ease; /* Transition pour l'effet de survol */
+  color: #fff; /* Texte blanc */
+}
+
+/* Style pour les boutons rouges */
+.publish-button:nth-child(odd) {
+  background-color: #d32f2f; /* Rouge vif pour les boutons impairs */
+}
+
+/* Style pour les boutons noirs */
+.publish-button:nth-child(even) {
+  background-color: #000; /* Noir pour les boutons pairs */
+}
+
+/* Effet au survol des boutons */
+.publish-button:hover {
+  opacity: 0.8; /* Réduit légèrement l'opacité pour un effet visuel */
+}
+
+/* Message d'erreur */
+.error {
+  color: red; /* Texte rouge pour les erreurs */
+  font-weight: bold; /* Texte en gras */
+  text-align: center; /* Centre le texte */
+  margin-top: 20px; /* Espacement supérieur */
+}

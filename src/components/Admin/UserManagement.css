@@ -1,0 +1,33 @@
+.user-table {
+  width: 100%;
+  border-collapse: collapse; /* Fusionne les bordures */
+  margin-top: 20px;
+  
+}
+
+.user-table th, .user-table td {
+  border: 1px solid #ccc; /* Bordure pour les cellules */
+  padding: 10px; /* Espace à l'intérieur des cellules */
+  text-align: left; /* Alignement du texte */
+}
+
+.user-table th {
+  background-color: #f2f2f2; /* Couleur d'arrière-plan pour l'en-tête */
+}
+
+.user-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Couleur pour les lignes paires */
+}
+
+button {
+  padding: 5px 10px; /* Espacement pour les boutons */
+  cursor: pointer; /* Pointeur pour les boutons */
+  border: none;
+  background-color: black; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte */
+  border-radius: 5px; /* Coins arrondis */
+}
+
+button:hover {
+  background-color: #003078; /* Couleur du bouton au survol */
+}

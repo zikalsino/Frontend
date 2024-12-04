@@ -1,0 +1,73 @@
+/* Full-Page Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  overflow: auto; /* Permet un défilement si nécessaire */
+}
+
+/* Main Application List Container */
+.application-list {
+  padding: 20px;
+  margin: 20px auto; /* Ajoute une marge pour centrer et espacer */
+  max-width: 1200px; /* Largeur maximale pour éviter de s'étendre trop */
+  background-color: #fff;
+  border: 1px solid #ddd; /* Ajoute une bordure légère */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour un effet esthétique */
+  border-radius: 8px; /* Coins arrondis */
+}
+
+/* Title Styling */
+.application-list h2 {
+  color: #007bff;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.5rem; /* Taille de police plus grande */
+}
+
+/* Table Styles */
+.application-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.application-list th,
+.application-list td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+  word-wrap: break-word; /* Permet de couper le texte s'il est trop long */
+}
+
+.application-list th {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+}
+
+.application-list tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.application-list tr:hover {
+  background-color: #e9e9e9;
+}
+
+/* Button Styles */
+.application-list button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.application-list button:hover {
+  background-color: #0056b3;
+}

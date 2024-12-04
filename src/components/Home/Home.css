@@ -1,0 +1,55 @@
+/* Styles globaux pour la page */
+.home-page {
+  display: flex;
+  flex-direction: column; /* Permet de mettre le header en haut */
+}
+
+/* Styles de la barre latérale */
+.sidebar {
+  width: 200px; /* Largeur de la sidebar */
+  background-color: #003078; /* Couleur de fond noir */
+  color: white; /* Couleur du texte */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre le contenu */
+  height: calc(200vh - 60px); /* Prend toute la hauteur de la fenêtre, moins la hauteur du header */
+}
+
+/* Styles pour le logo */
+.logo {
+  height: 90px; /* Ajuste la taille du logo */
+  width: 90px; /* Largeur pour rendre l'image circulaire */
+  border-radius: 50%; /* Transforme l'image en cercle */
+  margin-right: 10px; /* Espace entre le logo et le titre */
+  object-fit: cover; /* Assure que l'image remplit bien le cercle */
+  float: left; /* Permet au texte de circuler autour du logo */
+}
+
+/* Styles pour les liens de navigation */
+.nav-links {
+  width: 100%; /* Prend toute la largeur de la sidebar */
+  display: flex;
+  flex-direction: column; /* Colonne pour les liens */
+}
+
+.nav-link {
+  padding: 10px;
+  color: white; /* Couleur du texte */
+  text-decoration: none; /* Pas de soulignement */
+  text-align: center; /* Centre le texte */
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #555; /* Couleur au survol */
+}
+
+/* Styles de l'en-tête */
+
+/* Styles pour le contenu principal */
+.content {
+  flex: 1; /* Prend l'espace restant */
+  padding: 80px 20px; /* Espacement autour du contenu, espace en haut pour le header */
+  background-color: #f8f8f8; /* Couleur de fond du contenu */
+}

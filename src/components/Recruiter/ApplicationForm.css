@@ -1,0 +1,92 @@
+/* ApplicationForm.css */
+
+.application-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.application-form h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.application-form label {
+    font-weight: bold;
+    color: #555;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.application-form select,
+.application-form textarea,
+.application-form input[type="file"] {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.application-form select:focus,
+.application-form textarea:focus,
+.application-form input[type="file"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.application-form textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.application-form button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.application-form button:hover {
+    background-color: #0056b3;
+}
+
+.application-form .message {
+    text-align: center;
+    color: green;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.application-form .error-message {
+    color: red;
+}
+
+.application-form .cover-letter-button {
+    background-color: #6c757d;
+    color: #fff;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.application-form .cover-letter-button:hover {
+    background-color: #5a6268;
+}

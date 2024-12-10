@@ -7,7 +7,7 @@ import RecruiterDashboard from "./components/Recruiter/RecruiterDashboard";
 import AdminDashboard from "./components/Admin/AdminDashboard";
 import RequestResetPassword from "./components/Auth/RequestResetPassword";
 //import './App.css';
-//import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './components/PrivateRoute';
 import StatisticsAndReports from "./components/Admin/StatisticsAndReports";
 import ContentManagement from "./components/Admin/ContentManagement";
 import UserManagement from "./components/Admin/UserManagement";
@@ -20,12 +20,9 @@ import ApplicationList from './components/Recruiter/ApplicationList';
 import JobList from './components/Candidate/JobList';
 import ProfileManagement from './components/Profile/ProfileManagement';
 import UpdatePersonalInfo from './components/Profile/UpdatePersonnelnfo';
-import AddExperience from './components/Profile/AddExperience';
-import AddSkills from './components/Profile/AddSkills';
 import CreateJobOfferForm from './components/Recruiter/CreateJobOfferForm';
 import JobOfferList from './components/Recruiter/JobOfferList';
 import AddUser from './components/Admin/AddUser';
-import CVUpload from './components/Profile/CVUpload';
 import ApplicationForm from './components/Application/ApplicationForm';
 import ResetPassword from './components/Auth/ResetPassword';
 import JobOfferCreator from './components/Recruiter/JobOfferCreator';
@@ -49,20 +46,18 @@ function App() {
            <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/candidate" element={<CandidateDashboard />} />
+          <Route path="/candidate" element={ <PrivateRoute><  CandidateDashboard /></PrivateRoute>} />
           <Route path="/profile" element={<ProfileManagement />} />
                 <Route path="/update-info" element={<UpdatePersonalInfo />} />
-                <Route path="/add-experience" element={<AddExperience />} />
-                <Route path="/add-skill" element={<AddSkills />} />
-                <Route path="/upload-cv" element={<CVUpload />} />
+               
        
           
           <Route   path='/JobList' element={<JobList />}/>
           <Route path="/apply/:jobId" element={<ApplicationForm />} />
           <Route   path='/JobOfferList' element={<JobOfferList />}/>
       
-          <Route path="/recruiter" element={<RecruiterDashboard />} />
-          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/recruiter" element={<PrivateRoute><RecruiterDashboard /></PrivateRoute>} />
+          <Route path="/admin" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
           <Route path="/management" element={<UserManagement/>}/>
           <Route path="/report-generator" element={<Report />} />
           <Route path="/list" element={<ContentList />} />

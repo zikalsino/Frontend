@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from '../../services/api';
 import './ApplicationForm.css';
 
@@ -11,6 +11,8 @@ const ApplicationForm = () => {
   const [cvFile, setCvFile] = useState(null);
   const [coverLetter, setCoverLetter] = useState('');
   const [message, setMessage] = useState('');
+
+  const navigate = useNavigate(); // Déclaration de la fonction navigate
 
   useEffect(() => {
     fetchCurrentUser();
@@ -37,10 +39,6 @@ const ApplicationForm = () => {
       console.error("Erreur lors de la récupération des offres d'emploi", error);
     }
   };
-  const goBack = () => {
-    setCurrentPage("home");
-  };
-
 
   const handleFileUpload = (event) => {
     setCvFile(event.target.files[0]);
@@ -74,8 +72,12 @@ const ApplicationForm = () => {
     }
   };
 
+  // Fonction pour revenir à la page précédente
+  const goBack = () => {
+    navigate('/candidate'); // Cette ligne permet de revenir à la page précédente
+  };
+
   return (
-    <div className='container'>
     <div className="application-form">
       <h2>Postuler à une Offre</h2>
 
@@ -110,8 +112,7 @@ const ApplicationForm = () => {
       />
 
       <button onClick={handleApply}>Soumettre Candidature</button>
-      <button onClick={goBack}>Cancel</button>
-    </div>
+      <button onClick={goBack}>Annuler</button> {/* Le bouton Cancel utilise la fonction goBack */}
     </div>
   );
 };

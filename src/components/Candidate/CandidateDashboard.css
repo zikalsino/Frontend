@@ -6,6 +6,8 @@
   margin: 0; /* Supprime les marges externes */
   padding: 0; /* Supprime les marges internes */
   background-color: #f4f6f9; /* Couleur de fond claire */
+  width: 100%; /* Prend toute la largeur de la fenêtre */
+  overflow: hidden; /* Cache tout dépassement pour éviter des barres de défilement non voulues */
 }
 
 /* Barre latérale */
@@ -71,6 +73,8 @@
   background-color: #f4f6f9; /* Couleur de fond claire */
   padding: 20px; /* Espacement interne */
   overflow-y: auto; /* Ajoute un défilement vertical si le contenu dépasse */
+  width: 100%; /* Permet au contenu de prendre toute la largeur */
+  height: 100vh; /* Assure que le contenu prend toute la hauteur */
 }
 
 .content h1 {

@@ -92,7 +92,7 @@ function Login() {
         </div>
         {error && <p className="error-message">{error}</p>}
         {successMessage && <p className="success-message">{successMessage}</p>}
-        <button type="submit">Se connecter</button>
+        <button type="submit" className='login-button'>Se connecter</button>
       </form>
 
       <button onClick={goToRegister} className="redirect-button">

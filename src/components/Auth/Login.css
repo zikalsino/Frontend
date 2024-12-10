@@ -43,6 +43,7 @@ h2 {
 
 .form-group {
   margin-bottom: 15px;
+ 
 }
 
 input {
@@ -54,20 +55,39 @@ input {
   font-size: 16px;
 }
 
+/* Style général pour les boutons */
 button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
+  background-color: #4CAF50; /* Couleur de fond */
+  color: white; /* Couleur du texte */
   border: none;
-  border-radius: 5px;
+  padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  border-radius: 5px;
+  transition: background-color 0.3s ease; /* Transition pour un effet hover */
 }
 
+/* Style au survol */
 button:hover {
-  background-color: #0056b3;
+  background-color: #45a049; /* Couleur plus sombre au survol */
+}
+
+/* Style spécifique pour les boutons de redirection */
+.redirect-button {
+  background-color: #003078; /* Couleur de fond spécifique */
+  color: white;
+  margin: 10px 0;
+}
+
+/* Survol pour les boutons de redirection */
+.redirect-button:hover {
+  background-color: #003078;
+}
+
+
+button:hover {
+  background-color: #003078;
+  color: #003078;
 }
 
 .error-message, .success-message {
@@ -79,3 +99,22 @@ button:hover {
 .success-message {
   color: green;
 }
+
+/* Style pour le bouton "Se connecter" */
+.login-button {
+  background-color: #003078; /* Couleur de fond par défaut */
+  color: white; /* Couleur du texte */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transition douce */
+}
+
+/* Survol du bouton "Se connecter" */
+.login-button:hover {
+  background-color: #0056b3; /* Couleur plus foncée au survol */
+  color: white; /* Assure que le texte reste lisible */
+}
+

@@ -1,74 +1,66 @@
-/* Conteneur principal */
-.container {
-  display: flex; /* Flexbox pour centrer */
-  justify-content: center; /* Centre horizontalement */
-  align-items: center; /* Centre verticalement */
-  height: 100vh; /* Prend toute la hauteur de la fenêtre */
-  background-color: #f9f9f9; /* Couleur de fond douce */
-  padding: 20px; /* Espacement interne */
-  box-sizing: border-box; /* Inclut les bordures et le padding dans les dimensions */
-  
-}
-
-/* Formulaire */
+/* Style pour le formulaire de candidature */
 .application-form {
-  width: 100%; /* Largeur complète */
-  max-width: 800px; /* Largeur maximale pour contrôler l'étirement */
-  background-color: #ffffff; /* Fond blanc pour le formulaire */
-  border-radius: 10px; /* Coins arrondis */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce pour effet flottant */
-  padding: 30px; /* Espacement interne */
-  box-sizing: border-box; /* Inclut les bordures et padding dans les dimensions */
-  display: flex; /* Flexbox pour organisation */
-  flex-direction: column; /* Organisation verticale */
-  gap: 15px; /* Espacement entre les éléments */
+  width: 100%;
+  max-width: 600px; /* Largeur maximale du formulaire */
+  margin: 0 auto; /* Centrer le formulaire horizontalement */
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère autour du formulaire */
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
 }
 
-/* Titre */
 .application-form h2 {
-  font-size: 24px; /* Taille de police */
-  color: #34495e; /* Couleur élégante */
-  text-align: center; /* Centrer le texte */
+  font-size: 24px; /* Taille du titre */
+  color: #34495e; /* Couleur sombre */
   margin-bottom: 20px; /* Espacement sous le titre */
+  text-align: center;
 }
 
-/* Champs du formulaire */
 .application-form label {
-  font-size: 16px; /* Taille de police */
+  font-size: 16px; /* Taille des labels */
   color: #2c3e50; /* Couleur sombre */
-  margin-bottom: 5px; /* Espacement sous le label */
+  display: block;
+  margin-bottom: 8px; /* Espacement sous chaque label */
 }
 
 .application-form select,
-.application-form textarea,
-.application-form input[type="file"] {
-  width: 100%; /* Largeur complète */
-  padding: 10px; /* Espacement interne */
-  border: 1px solid #bdc3c7; /* Bordure grise */
-  border-radius: 5px; /* Coins arrondis */
-  font-size: 14px; /* Taille de police */
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre intérieure */
-}
-
-/* Zone de texte pour la lettre de motivation */
+.application-form input[type="file"],
 .application-form textarea {
-  height: 120px; /* Hauteur plus grande pour plus de contenu */
-  resize: none; /* Désactive le redimensionnement manuel */
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px; /* Espacement entre les champs */
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-/* Bouton de soumission */
 .application-form button {
-  background-color: #0ed01b; /* Bleu élégant */
+  background-color: #1abc9c; /* Couleur de fond des boutons */
+  color: white;
+  border: none;
+  padding: 12px 20px;
   border-radius: 5px;
-  color: #ffffff; /* Texte blanc */
-  border: none; /* Supprime les bordures */
-  padding: 10px 20px; /* Espacement interne */
-  font-size: 16px; /* Taille de la police */
-  border-radius: 5px; /* Coins arrondis */
-  cursor: pointer; /* Curseur pointeur */
-  transition: background-color 0.3s ease; /* Transition fluide */
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px; /* Espacement entre les boutons */
+  transition: background-color 0.3s ease;
 }
 
 .application-form button:hover {
-  background-color: #2980b9; /* Bleu plus foncé au survol */
+  background-color: #16a085; /* Couleur de fond au survol */
+}
+
+.application-form .error-message {
+  color: #e74c3c; /* Rouge pour les messages d'erreur */
+  font-size: 16px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.application-form .success-message {
+  color: #2ecc71; /* Vert pour les messages de succès */
+  font-size: 16px;
+  margin-top: 10px;
+  text-align: center;
 }

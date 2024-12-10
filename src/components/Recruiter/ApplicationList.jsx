@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ApplicationService from '../../services/ApplicationService';
 import './ApplicationList.css';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ApplicationList = ({ type, id }) => {
   const [applications, setApplications] = useState([]);
@@ -73,8 +75,8 @@ const ApplicationList = ({ type, id }) => {
                   )}
                 </td>
                 <td>
-                  <button onClick={() => handleStatusUpdate(app.id, 'ACCEPTED')}>Accepter</button>
-                  <button onClick={() => handleStatusUpdate(app.id, 'REJECTED')}>Rejeter</button>
+                  <button onClick={() => handleStatusUpdate(app.id, 'ACCEPTED')}>   <FontAwesomeIcon icon={faCheck} /></button>
+                  <button onClick={() => handleStatusUpdate(app.id, 'REJECTED')}>  <FontAwesomeIcon icon={faTimes} /></button>
                 </td>
               </tr>
             ))}

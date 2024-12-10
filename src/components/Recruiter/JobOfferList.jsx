@@ -9,9 +9,6 @@ const JobOfferList = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize] = useState(10);
 
-  // Champ de recherche unique
-  const [searchQuery, setSearchQuery] = useState('');
-
   const BASE_URL = 'http://localhost:8080/api/recruter/jobOffers';
 
   useEffect(() => {
@@ -27,7 +24,6 @@ const JobOfferList = () => {
         params: {
           page: currentPage,
           size: pageSize,
-          query: searchQuery, // Critère de recherche unique
         },
       });
       console.log('Données récupérées:', response.data.content);
@@ -38,12 +34,6 @@ const JobOfferList = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  // Gestion des recherches
-  const handleSearch = () => {
-    setCurrentPage(0); // Revenir à la première page pour une nouvelle recherche
-    loadJobOffers();
   };
 
   // Supprimer une offre
@@ -87,19 +77,6 @@ const JobOfferList = () => {
   return (
     <div className="job-list-container">
       <h2>Liste des Offres d'Emploi</h2>
-
-      {/* Barre de recherche */}
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Rechercher une offre (mot-clé, localisation, etc.)"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button className="search-button" onClick={handleSearch}>
-          Rechercher
-        </button>
-      </div>
 
       {jobOffers.length === 0 ? (
         <p>Aucune offre disponible pour le moment.</p>

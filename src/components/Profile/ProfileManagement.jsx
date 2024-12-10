@@ -1,188 +1,297 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import AddExperience from './AddExperience';
-import Skills from './Skills';
-import CVUpload from './CVUpload';
+import './Profile.css';
 
-const ProfileManagement = ({ candidateId }) => {
-  const [candidate, setCandidate] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    skills: [],
-    experience: [],
+function ProfileManagement() {
+  const [candidate, setCandidate] = useState(null);
+  const [experiences, setExperiences] = useState([]);
+  const [competences, setCompetences] = useState([]);
+  const [newExperience, setNewExperience] = useState({
+    poste: '',
+    entreprise: '',
+    description: '',
+    dateDebut: '',
+    dateFin: ''
   });
+  const [newCompetence, setNewCompetence] = useState({
+    nom: '',
+    domaine: '',
+  });
+  const [view, setView] = useState('main');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const [notifications, setNotifications] = useState([]);
-  const [loadingNotifications, setLoadingNotifications] = useState(false);
+  const candidateId = 1; // Remplacer par l'ID réel
+  const BASE_URL = 'http://localhost:8080/api/profile';
 
-  // Charger le profil du candidat
-  useEffect(() => {
-    if (!candidateId) {
-      console.error("ID du candidat est invalide !");
-      return;
-    }
-    axios.get(`http://localhost:8080/api/profile/${candidateId}`)
-      .then(response => setCandidate(response.data))
-      .catch(error => console.error('Erreur lors du chargement du profil :', error));
-  }, [candidateId]);
+  // Fonction pour récupérer le profil complet
+  const fetchFullProfile = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      console.log('Fetching profile for ID:', candidateId);
+      
+      // Fetch profile data
+      const profileResponse = await axios.get(`${BASE_URL}/${candidateId}`);
+      
+      // Fetch experiences
+      const experiencesResponse = await axios.get(`${BASE_URL}/${candidateId}/experiences`);
+      
+      // Fetch competences
+      const competencesResponse = await axios.get(`${BASE_URL}/${candidateId}/competences`);
 
-  // Charger les notifications non lues
-  useEffect(() => {
-    if (!candidateId) {
-      console.error("ID du candidat est invalide !");
-      return;
-    }
-    fetchNotifications();
-  }, [candidateId]);
+      console.log('Profile Response:', profileResponse.data);
+      console.log('Experiences:', experiencesResponse.data);
+      console.log('Competences:', competencesResponse.data);
 
-  const fetchNotifications = () => {
-    if (!candidateId) {
-      alert("ID du candidat est requis pour récupérer les notifications.");
-      return;
-    }
-
-    setLoadingNotifications(true);
-    axios.get(`http://localhost:8080/api/notifications/${candidateId}`)
-      .then(response => setNotifications(response.data))
-      .catch(error => {
-        console.error('Erreur lors du chargement des notifications :', error);
-        alert('Erreur lors du chargement des notifications.');
-      })
-      .finally(() => setLoadingNotifications(false));
-  };
-
-  // Marquer les notifications comme lues
-  // Fonction pour marquer une notification comme lue
-const markNotificationAsRead = (notificationId) => {
-  axios.post(`http://localhost:8080/api/notifications/mark-as-read/${notificationId}`)
-    .then(() => {
-      // Mettre à jour l'état local après avoir marqué la notification comme lue
-      setNotifications(prevNotifications =>
-        prevNotifications.map(notification =>
-          notification.id === notificationId
-            ? { ...notification, isRead: true }
-            : notification
-        )
-      );
-      alert('Notification marquée comme lue.');
-    })
-    .catch(error => console.error('Erreur lors du marquage de la notification :', error));
-};
-
-
-  // Mettre à jour le profil du candidat
-  const updateProfile = () => {
-    if (!candidateId) {
-      alert("ID du candidat est requis pour mettre à jour le profil.");
-      return;
-    }
-
-    axios.put(`http://localhost:8080/api/profile/${candidateId}/profile`, candidate)
-      .then(response => {
-        setCandidate(response.data);
-        alert('Profil mis à jour avec succès.');
-      })
-      .catch(error => {
-        console.error('Erreur lors de la mise à jour du profil :', error);
-        alert('Erreur lors de la mise à jour du profil.');
+      // Update state with fetched data
+      setCandidate({
+        name: profileResponse.data.name || 'N/A',
+        email: profileResponse.data.email || 'N/A',
+        skills: profileResponse.data.skills || 'Aucune compétence listée'
       });
+
+      setExperiences(experiencesResponse.data || []);
+      setCompetences(competencesResponse.data || []);
+      
+      // Switch to profile view
+      setView('profile');
+    } catch (error) {
+      console.error('Erreur lors de la récupération du profil:', error);
+      setError('Impossible de charger le profil. Veuillez réessayer.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleExperienceAdded = (newExperience) => {
-    setCandidate(prev => ({
-      ...prev,
-      experience: [...prev.experience, newExperience],
-    }));
+  const addExperience = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}/${candidateId}/experiences`, newExperience);
+      setExperiences([...experiences, response.data]);
+      setNewExperience({
+        poste: '',
+        entreprise: '',
+        description: '',
+        dateDebut: '',
+        dateFin: ''
+      });
+      setView('main');
+      alert('Expérience ajoutée avec succès');
+    } catch (error) {
+      console.error("Erreur lors de l'ajout de l'expérience", error);
+      alert("Erreur lors de l'ajout de l'expérience");
+    }
   };
 
-  const handleSkillAdded = (newSkill) => {
-    setCandidate(prev => ({
-      ...prev,
-      skills: [...prev.skills, newSkill],
-    }));
+  const addCompetence = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}/${candidateId}/competences`, newCompetence);
+      setCompetences([...competences, response.data]);
+      setNewCompetence({
+        nom: '',
+        domaine: '',
+      });
+      setView('main');
+      alert('Compétence ajoutée avec succès');
+    } catch (error) {
+      console.error("Erreur lors de l'ajout de la compétence", error);
+      alert("Erreur lors de l'ajout de la compétence");
+    }
   };
 
   return (
-    <div>
-      <h1>Gestion du Profil</h1>
+    <div className="container mx-auto p-4">
+      {view === 'main' && (
+        <>
+          <h1 className="text-2xl font-bold mb-4">Gestion du Profil</h1>
+          <div className="flex flex-col items-start">
+            <button
+              onClick={() => setView('addExperience')}
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-2"
+            >
+              Ajouter une expérience
+            </button>
+            <button
+              onClick={() => setView('addCompetence')}
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-2"
+            >
+              Ajouter une compétence
+            </button>
+            <button
+              onClick={fetchFullProfile}
+              disabled={loading}
+              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
+              {loading ? 'Chargement...' : 'Voir le profil'}
+            </button>
+          </div>
+        </>
+      )}
 
-      {/* Section Notifications */}
-      <div>
-        <h2>Notifications</h2>
-        <button onClick={fetchNotifications}>
-          Notifications
-          {notifications.length > 0 && (
-            <span style={{ marginLeft: '10px', color: 'red' }}>
-              ({notifications.length})
-            </span>
+      {view === 'profile' && (
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8">
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+              {error}
+            </div>
           )}
-        </button>
-        {loadingNotifications ? (
-          <p>Chargement des notifications...</p>
-        ) : (
-          <div className="notifications-dropdown">
-  {notifications.map(notification => (
-    <div key={notification.id} style={{ borderBottom: '1px solid #ccc', padding: '5px' }}>
-      <p>{notification.message}</p>
-      <small>{new Date(notification.createdAt).toLocaleString()}</small>
-      <div>
-        {/* Affichage de l'état de la notification (lue ou non) */}
-        <strong>{notification.isRead ? 'Lue' : 'Non lue'}</strong>
-        {/* Bouton pour marquer la notification comme lue */}
-        {!notification.isRead && (
-          <button onClick={() => markNotificationAsRead(notification.id)}>
-            Marquer comme lue
+
+          <h2 className="text-xl font-bold mb-4">Profil du Candidat</h2>
+          {candidate ? (
+            <div className="mb-4">
+              <p><strong>Nom :</strong> {candidate.name}</p>
+              <p><strong>Email :</strong> {candidate.email}</p>
+              <p><strong>Compétences :</strong> {candidate.skills}</p>
+            </div>
+          ) : (
+            <p>Profil introuvable</p>
+          )}
+
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold mb-2">Expériences</h3>
+            {experiences.length > 0 ? (
+              <ul>
+                {experiences.map((exp, index) => (
+                  <li key={exp.id || index} className="mb-2 border-b pb-2">
+                    <strong>{exp.poste}</strong> chez {exp.entreprise} 
+                    <p className="text-gray-600">({exp.dateDebut} - {exp.dateFin})</p>
+                    <p>{exp.description}</p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>Aucune expérience trouvée</p>
+            )}
+          </div>
+
+          <div>
+            <h3 className="text-lg font-semibold mb-2">Compétences</h3>
+            {competences.length > 0 ? (
+              <ul className="flex flex-wrap gap-2">
+                {competences.map((comp, index) => (
+                  <li 
+                    key={comp.id || index} 
+                    className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                  >
+                    {comp.nom} - {comp.domaine}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>Aucune compétence trouvée</p>
+            )}
+          </div>
+
+          <button
+            onClick={() => setView('main')}
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4"
+          >
+            Retour
           </button>
-        )}
-      </div>
-    </div>
-  ))}
-  {notifications.length > 0 && (
-    <button onClick={markNotificationsAsRead}>
-      Marquer toutes comme lues
-    </button>
-  )}
-</div>
-        )}
-      </div>
+        </div>
+      )}
 
-      {/* Mise à jour du profil */}
-      <div>
-        <h2>Mise à jour du profil</h2>
-        <input
-          type="text"
-          placeholder="Prénom"
-          value={candidate.firstName}
-          onChange={e => setCandidate({ ...candidate, firstName: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Nom"
-          value={candidate.lastName}
-          onChange={e => setCandidate({ ...candidate, lastName: e.target.value })}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={candidate.email}
-          onChange={e => setCandidate({ ...candidate, email: e.target.value })}
-        />
-        <button onClick={updateProfile}>
-          Mettre à jour le profil
-        </button>
-      </div>
+      {view === 'addExperience' && (
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8">
+          <h2 className="text-xl font-bold mb-4">Ajouter une expérience</h2>
+          <input
+            type="text"
+            placeholder="Poste"
+            value={newExperience.poste}
+            onChange={(e) => setNewExperience({ ...newExperience, poste: e.target.value })}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Entreprise"
+            value={newExperience.entreprise}
+            onChange={(e) => setNewExperience({ ...newExperience, entreprise: e.target.value })}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2"
+            required
+          />
+          <textarea
+            placeholder="Description"
+            value={newExperience.description}
+            onChange={(e) => setNewExperience({ ...newExperience, description: e.target.value })}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2"
+            rows="4"
+          />
+          <div className="flex gap-2">
+            <div className="w-1/2">
+              <label className="block text-gray-700 text-sm mb-2">Date de début</label>
+              <input
+                type="date"
+                value={newExperience.dateDebut}
+                onChange={(e) => setNewExperience({ ...newExperience, dateDebut: e.target.value })}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2"
+                required
+              />
+            </div>
+            <div className="w-1/2">
+              <label className="block text-gray-700 text-sm mb-2">Date de fin</label>
+              <input
+                type="date"
+                value={newExperience.dateFin}
+                onChange={(e) => setNewExperience({ ...newExperience, dateFin: e.target.value })}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2"
+              />
+            </div>
+          </div>
+          <div className="flex justify-between mt-4">
+            <button
+              onClick={addExperience}
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Ajouter
+            </button>
+            <button
+              onClick={() => setView('main')}
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Annuler
+            </button>
+          </div>
+        </div>
+      )}
 
-      {/* Ajouter les expériences */}
-      <AddExperience candidateId={candidateId} onExperienceAdded={handleExperienceAdded} />
-
-      {/* Ajouter les compétences */}
-      <Skills candidateId={candidateId} onSkillAdded={handleSkillAdded} />
-
-      {/* Uploader le CV */}
-      <CVUpload candidateId={candidateId} />
+      {view === 'addCompetence' && (
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8">
+          <h2 className="text-xl font-bold mb-4">Ajouter une compétence</h2>
+          <input
+            type="text"
+            placeholder="Compétence"
+            value={newCompetence.nom}
+            onChange={(e) => setNewCompetence({ ...newCompetence, nom: e.target.value })}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Domaine"
+            value={newCompetence.domaine}
+            onChange={(e) => setNewCompetence({ ...newCompetence, domaine: e.target.value })}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2"
+            required
+          />
+          <div className="flex justify-between mt-4">
+            <button
+              onClick={addCompetence}
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Ajouter
+            </button>
+            <button
+              onClick={() => setView('main')}
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Annuler
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
-};
+}
 
 export default ProfileManagement;

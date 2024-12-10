@@ -19,7 +19,7 @@ const JobList = () => {
     setError(null);
     try {
       // Remplacer l'URL pour récupérer uniquement les offres publiées
-      const response = await axios.get('http://localhost:8080/api/recruter/active');
+      const response = await axios.get('http://localhost:8080/api/recruter/published');
       setJobOffers(response.data);
     } catch (error) {
       console.error('Erreur lors du chargement des offres publiées', error);

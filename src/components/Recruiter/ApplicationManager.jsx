@@ -1,30 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Manage.css";
-//import ApplicationService from "../../services/ApplicationService";
 
 const ApplicationManager = () => {
-  const [currentPage, setCurrentPage] = useState("home"); // Page courante
-  const [jobOfferId, setJobOfferId] = useState("");
-  const [applicationId, setApplicationId] = useState("");
-  const [candidateId, setCandidateId] = useState("");
+  const [currentPage, setCurrentPage] = useState("home");
+  const [jobOffers, setJobOffers] = useState([]); // Liste des offres d'emploi
+  const [selectedJobOffer, setSelectedJobOffer] = useState(""); // Offre sélectionnée
   const [applications, setApplications] = useState([]);
+  const [applicationId, setApplicationId] = useState("");
   const [status, setStatus] = useState("");
   const [score, setScore] = useState(0);
   const [notes, setNotes] = useState("");
   const [message, setMessage] = useState("");
+  const [candidateId, setCandidateId] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Fonction pour aller à une autre page
+  // Charger les offres d'emploi lors du premier rendu
+  useEffect(() => {
+    const fetchJobOffers = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/recruter/published");
+        setJobOffers(response.data);
+      } catch (err) {
+        console.error("Erreur lors de la récupération des offres d'emploi", err);
+      }
+    };
+    fetchJobOffers();
+  }, []);
+
   const navigateTo = (page) => {
     setCurrentPage(page);
     setError("");
     setSuccess("");
   };
 
-  // Fonction pour revenir à la page d'accueil
   const goBack = () => {
     setCurrentPage("home");
   };
@@ -36,7 +47,7 @@ const ApplicationManager = () => {
     setSuccess("");
     try {
       const response = await axios.post("http://localhost:8080/api/applications/offres/candidatures", {
-        id: jobOfferId,
+        id: selectedJobOffer,
       });
       setApplications(response.data);
       setSuccess("Candidatures récupérées avec succès !");
@@ -54,11 +65,12 @@ const ApplicationManager = () => {
     setError("");
     setSuccess("");
     try {
-      const response = await axios.post(`http://localhost:8080/api/applications/evaluate/${applicationId}`, null, {
-        params: { score, notes },
-      });
+      const response = await axios.post(
+        `http://localhost:8080/api/applications/evaluate/${applicationId}`,
+        null,
+        { params: { score, notes } }
+      );
       setSuccess("Candidature évaluée avec succès !");
-      console.log(response.data);
     } catch (err) {
       setError("Erreur lors de l'évaluation de la candidature.");
       console.error(err);
@@ -67,64 +79,53 @@ const ApplicationManager = () => {
     }
   };
 
-  // Modifier le statut d'une candidature
+  // Mettre à jour le statut
   const updateApplicationStatus = async () => {
     setLoading(true);
     setError("");
     setSuccess("");
     try {
-      const response = await axios.patch(`http://localhost:8080/api/applications/status/${applicationId}`, null, {
-        params: { status },
-      });
-      setSuccess("Statut du candidat mis à jour avec succès !");
-      console.log(response.data);
+      const response = await axios.patch(
+        `http://localhost:8080/api/applications/status/${applicationId}`,
+        null,
+        { params: { status } }
+      );
+      setSuccess("Statut mis à jour avec succès !");
     } catch (err) {
-      setError("Erreur lors de la mise à jour du statut de la candidature.");
+      setError("Erreur lors de la mise à jour du statut.");
       console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
-  // Notifier un candidat
-  const notifyCandidate = async () => {
-    setLoading(true);
-    setError("");
-    setSuccess("");
-    try {
-      await axios.post(`http://localhost:8080/api/applications/notify/${candidateId}`, message, {
-        headers: { "Content-Type": "text/plain" },
-      });
-      setSuccess("Notification envoyée avec succès !");
-    } catch (err) {
-      setError("Erreur lors de l'envoi de la notification.");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Contenu des pages
   const renderHomePage = () => (
     <div>
       <h1>Gestion des Candidatures</h1>
       <button onClick={() => navigateTo("viewApplications")}>Visualiser les Candidatures</button>
       <button onClick={() => navigateTo("evaluateApplication")}>Évaluer une Candidature</button>
       <button onClick={() => navigateTo("updateApplicationStatus")}>Mettre à jour le Statut</button>
-      <button onClick={() => navigateTo("notifyCandidate")}>Notifier un Candidat</button>
+      {/* <button onClick={() => navigateTo("notifyCandidate")}>Notifier un Candidat</button> */}
     </div>
   );
 
   const renderViewApplicationsPage = () => (
     <div>
       <h2>Visualiser les Candidatures</h2>
-      <input
-        type="text"
-        placeholder="ID de l'offre d'emploi"
-        value={jobOfferId}
-        onChange={(e) => setJobOfferId(e.target.value)}
-      />
-      <button onClick={fetchApplications}>Afficher les candidatures</button>
+      <select
+        value={selectedJobOffer}
+        onChange={(e) => setSelectedJobOffer(e.target.value)}
+      >
+        <option value="">-- Sélectionner une offre d'emploi --</option>
+        {jobOffers.map((offer) => (
+          <option key={offer.id} value={offer.id}>
+            {offer.title}
+          </option>
+        ))}
+      </select>
+      <button onClick={fetchApplications} disabled={!selectedJobOffer}>
+        Afficher les candidatures
+      </button>
       {loading && <p>Chargement...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
@@ -200,34 +201,12 @@ const ApplicationManager = () => {
     </div>
   );
 
-  const renderNotifyCandidatePage = () => (
-    <div>
-      <h2>Notifier un Candidat</h2>
-      <input
-        type="text"
-        placeholder="ID du candidat"
-        value={candidateId}
-        onChange={(e) => setCandidateId(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Message"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      />
-      <button onClick={notifyCandidate}>Envoyer</button>
-      <button onClick={goBack}>Retour</button>
-    </div>
-  );
-
-  // Affichage en fonction de la page courante
   return (
     <div className="container">
       {currentPage === "home" && renderHomePage()}
       {currentPage === "viewApplications" && renderViewApplicationsPage()}
       {currentPage === "evaluateApplication" && renderEvaluateApplicationPage()}
       {currentPage === "updateApplicationStatus" && renderUpdateStatusPage()}
-      {currentPage === "notifyCandidate" && renderNotifyCandidatePage()}
     </div>
   );
 };

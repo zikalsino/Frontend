@@ -5,6 +5,7 @@ import JobList from './JobList';
 import { useNavigate } from 'react-router-dom';
 import ApplicationForm from '../Application/ApplicationForm';
 import ProfileManagement from '../Profile/ProfileManagement';
+import JobSearch from './JobSearch';
 
 
 function CandidateDashboard() {
@@ -52,6 +53,7 @@ function CandidateDashboard() {
         <h1>Candidate Dashboard</h1>
         {renderSection()}
       </div>
+      <JobSearch />
     </div>
   );
 }
